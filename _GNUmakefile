@@ -1,0 +1,21 @@
+# GNUmakefile for sanekits/remake (shellkit integration stuff, do not PR upstream)
+
+DebianDepends := autotools-dev autoconf autopoint gcc pkg-config gettext libreadline-dev guile-2.2 make lzip
+
+.PHONY: nope
+nope:
+	exit "Sorry, you need to read GNUmakefile"
+
+.PHONY: autotools-cfg
+autotools-cfg:
+	# For debian/ubuntu, -ish
+	sudo apt-get update && sudo apt-get install -y $(DebianDepends)
+
+.PHONY: build-setup
+build-setup:
+	which autoconf || $(MAKE) autotools-cfg
+	./autogen.sh
+
+
+
+
